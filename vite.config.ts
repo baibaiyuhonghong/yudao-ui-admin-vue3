@@ -37,15 +37,18 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
             // 允许通过 Tailscale 地址（tom.tailec9db2.ts.net）访问开发服务器；默认只允许 localhost
             allowedHosts: ['tom.tailec9db2.ts.net'],
             open: env.VITE_OPEN === 'true',
-            // 本地跨域代理. 目前注释的原因：暂时没有用途，server 端已经支持跨域
-            // proxy: {
-            //   ['/admin-api']: {
-            //     target: env.VITE_BASE_URL,
-            //     ws: false,
-            //     changeOrigin: true,
-            //     rewrite: (path) => path.replace(new RegExp(`^/admin-api`), ''),
-            //   },
-            // },
+            // 本地跨域代理：前端 API 改走相对路径（.env.env.local 的 VITE_BASE_URL 置空）后，
+            // /admin-api 请求由 Vite 在服务端转发到本机后端。浏览器只跟 Vite 同源通信，
+            // 这样经 Tailscale 地址（https）在手机/其它设备上打开时，API 也能通，
+            // 不再被浏览器的混合内容 / 本机网络访问限制拦截。
+            // 注意：不做 rewrite —— 后端接口本身就带 /admin-api 前缀。
+            proxy: {
+                ['/admin-api']: {
+                    target: 'http://localhost:48080',
+                    ws: true,
+                    changeOrigin: true,
+                },
+            },
         },
         // 项目使用的vite插件。 单独提取到build/vite/plugin中管理
         plugins: createVitePlugins(isBuild, env),
