@@ -34,6 +34,8 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
         server: {
             port: env.VITE_PORT, // 端口号
             host: "0.0.0.0",
+            // 允许通过 Tailscale 地址（tom.tailec9db2.ts.net）访问开发服务器；默认只允许 localhost
+            allowedHosts: ['tom.tailec9db2.ts.net'],
             open: env.VITE_OPEN === 'true',
             // 本地跨域代理. 目前注释的原因：暂时没有用途，server 端已经支持跨域
             // proxy: {
