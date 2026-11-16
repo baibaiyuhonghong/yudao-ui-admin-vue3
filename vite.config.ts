@@ -35,7 +35,7 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
             port: env.VITE_PORT, // 端口号
             host: "0.0.0.0",
             // 允许通过 Tailscale 地址（tom.tailec9db2.ts.net）访问开发服务器；默认只允许 localhost
-            allowedHosts: ['tom.tailec9db2.ts.net', 'tom.baibaiyuhonghong.ts.net'],
+            allowedHosts: ['tom.tailec9db2.ts.net'],
             open: env.VITE_OPEN === 'true',
             // 本地跨域代理：前端 API 改走相对路径（.env.env.local 的 VITE_BASE_URL 置空）后，
             // /admin-api 请求由 Vite 在服务端转发到本机后端。浏览器只跟 Vite 同源通信，
