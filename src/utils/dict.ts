@@ -134,6 +134,8 @@ export enum DICT_TYPE {
   SYSTEM_NOTIFY_TEMPLATE_TYPE = 'system_notify_template_type',
   SYSTEM_SOCIAL_TYPE = 'system_social_type',
   SYSTEM_NAV_LINK_CATEGORY = 'system_nav_link_category',
+  SYSTEM_TODO_STATUS = 'system_todo_status',
+  SYSTEM_TODO_PRIORITY = 'system_todo_priority',
 
   // ========== INFRA 模块 ==========
   INFRA_BOOLEAN_STRING = 'infra_boolean_string',
